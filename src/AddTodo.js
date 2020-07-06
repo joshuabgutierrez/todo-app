@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
+import { TodosContext } from "./Context/TodosContext";
+import { ACTIONS } from "./Reducers/TodosReducer";
 
 const StyledForm = styled.form`
   margin: 3em auto;
@@ -39,42 +41,31 @@ const AddTodoButton = styled(StyledInput)`
   }
 `;
 
-class AddTodo extends Component {
-  state = {
-    content: ""
-  };
+function AddTodo() {
+  const [text, setText] = useState("");
+  const { dispatch } = useContext(TodosContext);
 
-  handleChange = e => {
-    this.setState({
-      content: e.target.value
-    });
-  };
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.addTodo(this.state);
-    this.setState({
-      content: ""
-    });
+    dispatch({ type: ACTIONS.ADD_TODO, payload: text });
+    setText("");
   };
 
-  render() {
-    return (
-      <div>
-        <StyledForm onSubmit={this.handleSubmit}>
-          <label>Add new todo</label>
-          <FormElements>
-            <StyledInput
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.content}
-            />
-            <AddTodoButton type="submit" value="Add" />
-          </FormElements>
-        </StyledForm>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <StyledForm onSubmit={handleSubmit}>
+        <label>Add new todo</label>
+        <FormElements>
+          <StyledInput
+            type="text"
+            onChange={e => setText(e.target.value)}
+            value={text}
+          />
+          <AddTodoButton type="submit" value="Add" />
+        </FormElements>
+      </StyledForm>
+    </div>
+  );
 }
 
 export default AddTodo;
