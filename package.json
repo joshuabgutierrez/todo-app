@@ -1,29 +1,34 @@
 {
-	"name": "todo-app-production",
+	"name": "todo-app",
 	"version": "1.0.0",
 	"description": "",
+	"main": "server.js",
 	"private": true,
-	"keywords": [],
-	"main": "src/index.js",
 	"dependencies": {
-		"@styled-icons/boxicons-solid": "^10.6.0",
-		"@styled-icons/material": "10.0.0",
-		"axios": "^0.19.2",
-		"react": "16.12.0",
-		"react-dom": "16.12.0",
-		"react-scripts": "3.0.1",
-		"styled-components": "5.1.0"
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"mongoose": "^5.9.25"
 	},
 	"devDependencies": {
-		"typescript": "3.8.3"
+		"concurrently": "^5.2.0",
+		"nodemon": "^2.0.4"
 	},
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test --env=jsdom",
-		"eject": "react-scripts eject",
-		"startServer": "nodemon server.js"
+		"start": "node server.js",
+		"server": "nodemon server.js",
+		"client": "npm start --prefix frontend",
+		"devStart": "concurrently \"npm run server\" \"npm run client\""
 	},
-	"browserslist": [ ">0.2%", "not dead", "not ie <= 11", "not op_mini all" ],
-	"proxy": "http://localhost:5000/"
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/joshuabgutierrez/todo-app.git"
+	},
+	"keywords": [],
+	"author": "Joshua Gutierrez",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/joshuabgutierrez/todo-app/issues"
+	},
+	"homepage": "https://github.com/joshuabgutierrez/todo-app#readme"
 }
